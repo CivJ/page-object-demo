@@ -49,10 +49,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rake
+  rake (~> 10.5)
   rspec (~> 3.3)
-  rubocop
-  should_not
+  rubocop (= 0.26.1)
+  should_not (~> 1.1)
   watir-webdriver
 
 BUNDLED WITH
