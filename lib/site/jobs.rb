@@ -1,32 +1,49 @@
 require 'watir-webdriver'
 
 module Site
-  class Jobs
+
+  attr_reader :browser
+
+  class BrowserContainer
+    def initialize(browser)
+      @browser = browser
+    end
+  end
+
+  class LoginPage < BrowserContainer
     URL = 'test.wonolo.com/jobs'
+
     ID_USER_EMAIL = 'user_email'
     ID_USER_PASSWORD = 'user_password'
+    NAME_LOGIN_BUTTON = 'commit'
+
+    def open
+      @browser.goto(URL)
+      self
+    end
+
+    def login_as(user = 'john.crimmins@gmail.com', password = 'password')
+      @browser.text_field(id: ID_USER_EMAIL).set(user)
+      @browser.text_field(id: ID_USER_PASSWORD).set(password)
+      @browser.button(name: NAME_LOGIN_BUTTON).click
+    end
+  end
+
+  class Jobs < BrowserContainer
     ID_TEAM_NAME = 'team_name'
     ID_TEAM_CREATE = 'create_team_modal'
-
-    NAME_LOGIN_BUTTON = 'commit'
 
     # TODO: Resolve these another way, using english is brittle.
     TEXT_TEAM_LINK = 'Teams'
     TEXT_ADD_TEAM_LINK = '+ New Team'
 
-    attr_reader :browser
     # TODO: Multiple browsers. Browser options could be read from a config file at runtime.
-    def initialize(user_name = 'john.crimmins@gmail.com', password = 'password', browser = :chrome)
-      @user_name = user_name
-      @password = password
+    def initialize(browser = :chrome)
       @browser = Watir::Browser.new
     end
 
-    def login
-      @browser.goto(URL)
-      @browser.text_field(id: ID_USER_EMAIL).set(@user_name)
-      @browser.text_field(id: ID_USER_PASSWORD).set(@password)
-      @browser.button(name: NAME_LOGIN_BUTTON).click
+    def login_page
+      @login_page = Site::LoginPage.new(@browser)
     end
 
     # TODO: build in a check to make sure we're in the right place before trying to click the link.
