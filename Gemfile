@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'activesupport', '~> 4.2'
 gem 'rake', '~> 10.5'
 gem 'rspec', '~> 3.3'
 gem 'should_not', '~> 1.1'

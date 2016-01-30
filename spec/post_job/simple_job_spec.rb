@@ -1,4 +1,6 @@
 require_relative '../spec_helper'
+require 'active_support'
+require 'active_support/core_ext/numeric'
 require_relative '../../lib/site/jobs'
 
 describe 'test.wonolo.com job creation' do
