@@ -1,10 +1,8 @@
-# TODO name this file something else.
+# TODO: name this file something else.
 require 'watir-webdriver'
 
 module Site
-
   class BrowserContainer
-
     attr_reader :browser
     def initialize(browser)
       @browser = browser
@@ -69,7 +67,7 @@ module Site
 
   class Wonolo < BrowserContainer
     # TODO: Multiple browsers. Browser options could be read from a config file at runtime.
-    def initialize(browser = :chrome)
+    def initialize
       @browser = Watir::Browser.new
     end
 
