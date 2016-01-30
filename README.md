@@ -18,6 +18,9 @@ It may be possible, but I'd need to confer with someone better at front-end stuf
 We can talk about the calendar problems if you want to follow up with me further.
 
 # How to run
+
+Tested on Ruby 1.9.3 and 2.2.3
+
 ```
 bundle install
 bundle exec rake build
@@ -25,7 +28,7 @@ bundle exec rake build
 
 # From IRB
 ```
-require 'lib/site/jobs
+require 'lib/site/jobs'
 wonolo = Site::Wonolo.new # you can now navigate the site 
 ```
 
