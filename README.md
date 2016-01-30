@@ -18,8 +18,10 @@ It may be possible, but I'd need to confer with someone better at front-end stuf
 We can talk about the calendar problems if you want to follow up with me further.
 
 # How to run
-`bundle install`
-`bundle exec rake build`
+```
+bundle install
+bundle exec rake build
+```
 
 # From IRB
 ```
