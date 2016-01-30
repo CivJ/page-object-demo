@@ -1,12 +1,17 @@
+# TODO name this file something else.
 require 'watir-webdriver'
 
 module Site
 
-  attr_reader :browser
-
   class BrowserContainer
+
+    attr_reader :browser
     def initialize(browser)
       @browser = browser
+    end
+
+    def set_text(id, text)
+      @browser.text_field(id: id).when_present.set(text)
     end
   end
 
@@ -26,44 +31,50 @@ module Site
       @browser.text_field(id: ID_USER_EMAIL).set(user)
       @browser.text_field(id: ID_USER_PASSWORD).set(password)
       @browser.button(name: NAME_LOGIN_BUTTON).click
+      DashboardPage.new(@browser)
     end
   end
 
-  class Jobs < BrowserContainer
-    ID_TEAM_NAME = 'team_name'
-    ID_TEAM_CREATE = 'create_team_modal'
-
+  class DashboardPage < BrowserContainer
     # TODO: Resolve these another way, using english is brittle.
     TEXT_TEAM_LINK = 'Teams'
+    def team_page
+      link = @browser.link(text: TEXT_TEAM_LINK)
+      link.click
+      # TODO: Make some of these objects singletons
+      TeamPage.new(@browser)
+    end
+  end
+
+  class TeamPage < BrowserContainer
+    # TODO: Resolve these another way, using english is brittle.
     TEXT_ADD_TEAM_LINK = '+ New Team'
 
+    def open_team_modal
+      link = @browser.link(text: TEXT_ADD_TEAM_LINK)
+      link.click
+      # TODO: Make some of these objects singletons
+      TeamModal.new(@browser)
+    end
+  end
+
+  class TeamModal < BrowserContainer
+    ID_TEAM_NAME = 'team_name'
+    ID_TEAM_CREATE = 'create_team_modal'
+    def create_team(name)
+      set_text(ID_TEAM_NAME, name)
+      @browser.button(id: ID_TEAM_CREATE).click
+    end
+  end
+
+  class Wonolo < BrowserContainer
     # TODO: Multiple browsers. Browser options could be read from a config file at runtime.
     def initialize(browser = :chrome)
       @browser = Watir::Browser.new
     end
 
     def login_page
-      @login_page = Site::LoginPage.new(@browser)
-    end
-
-    # TODO: build in a check to make sure we're in the right place before trying to click the link.
-    # This could get pretty sophisticated. We could model entire workflows to ensure we could only
-    # take actions that make sense given our current location on the site and other factors.
-    def create_team(name)
-      link = @browser.link(text: TEXT_TEAM_LINK)
-      link.click
-      link = @browser.link(text: TEXT_ADD_TEAM_LINK)
-      link.click
-
-      team_name = name + Time.now.to_i.to_s
-      set_text(ID_TEAM_NAME, team_name)
-      @browser.button(id: ID_TEAM_CREATE).click
-      team_name
-    end
-
-    private
-    def set_text(id, text)
-      @browser.text_field(id: id).when_present.set(text)
+      @login_page = LoginPage.new(@browser)
     end
   end
 end

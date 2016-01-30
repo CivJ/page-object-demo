@@ -2,12 +2,12 @@ require_relative '../../lib/site/jobs'
 
 describe 'test.wonolo.com team creation' do
   it 'should create a team' do
-    site = Site::Jobs.new
-    login_page = site.login_page.open
-    login_page.login_as
-
-
-    # full_team_name = site.create_team('auto_test_team')
-    # expect(site.browser.text.include?(full_team_name)).to be true
+    wonolo = Site::Wonolo.new
+    login_page = wonolo.login_page.open
+    dashboard_page = login_page.login_as
+    team_modal = dashboard_page.team_page.open_team_modal
+    name = "auto_test_team#{Time.now.to_i.to_s}"
+    team_modal.create_team(name)
+    expect(wonolo.browser.text.include?(name)).to be true
   end
 end
