@@ -10,5 +10,11 @@ describe 'test.wonolo.com job creation' do
     job_page
       .job_name("auto_test_job#{Time.now.to_i}")
       .category('Delivery')
+      .description('Delivering software by writing automated tests.')
+      .workers_needed('2')
+      .select_badges([Site::JobPage::DELIVERY_BADGE, Site::JobPage::DELIVERY_BADGE_GOLD])
+      .address('100 foo street')
+      .city('San Francisco')
+      .zip('94115')
   end
 end
