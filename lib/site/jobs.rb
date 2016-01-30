@@ -36,11 +36,23 @@ module Site
   class DashboardPage < BrowserContainer
     # TODO: Resolve these another way, using english is brittle.
     TEXT_TEAM_LINK = 'Teams'
+    TEXT_NEW_JOB_LINK = '+ New Job'
+
     def team_page
-      link = @browser.link(text: TEXT_TEAM_LINK)
-      link.click
+      click_link(TEXT_TEAM_LINK)
       # TODO: Make some of these objects singletons
       TeamPage.new(@browser)
+    end
+
+    def new_job
+      click_link(TEXT_NEW_JOB_LINK)
+    end
+
+    private
+
+    def click_link(text)
+      link = @browser.link(text: text)
+      link.click
     end
   end
 

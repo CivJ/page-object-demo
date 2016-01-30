@@ -53,7 +53,7 @@ DEPENDENCIES
   rspec (~> 3.3)
   rubocop (= 0.26.1)
   should_not (~> 1.1)
-  watir-webdriver
+  watir-webdriver (= 0.9.1)
 
 BUNDLED WITH
    1.10.6
