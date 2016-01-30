@@ -1,36 +1,30 @@
-# Jobs::Test
+# Test Plan
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jobs/test`. To experiment with that code, run `bin/console` for an interactive prompt.
+We're going to build an object model of the site. Rspec tests will use this model to drive a browser and make assertions.
+If this was a real project, the site model would be a separate gem.
+ 
+Pulling your automation apart from tests is important. You can use this site model to build a crawler that can
+simulate customer behavior or help automate Localization QA.
 
-TODO: Delete this and the text above, and describe your gem
+Also, you can use this site object from IRB, which is really sweet.
 
-## Installation
+## Team Creation
+Use the site object model to automatically create a single team with simple inputs. Cleanup is out of scope for this demo.
 
-Add this line to your application's Gemfile:
+## Job Creation
+Use the site object model to automatically create a single job with simple inputs. Given that providing a date is required and 
+the calendar does not behave as expected, this workflow is difficult to complete and I have given up trying to create a job. 
+It may be possible, but I'd need to confer with someone better at front-end stuff that me.
+We can talk about the calendar problems if you want to follow up with me further.
 
-```ruby
-gem 'jobs-test'
+# How to run
+`bundle install`
+`bundle exec rake build`
+
+# From IRB
+```
+require 'lib/site/jobs
+wonolo = Site::Wonolo.new # you can now navigate the site 
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install jobs-test
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jobs-test.
-
+  
