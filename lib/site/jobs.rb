@@ -1,4 +1,5 @@
-# TODO: name this file something else.
+# TODO: Name this file something else.
+# TODO: Put these classes in seperate files eventually.
 require 'watir-webdriver'
 
 module Site
@@ -15,7 +16,6 @@ module Site
 
   class LoginPage < BrowserContainer
     URL = 'test.wonolo.com/jobs'
-
     ID_USER_EMAIL = 'user_email'
     ID_USER_PASSWORD = 'user_password'
     NAME_LOGIN_BUTTON = 'commit'
@@ -46,6 +46,23 @@ module Site
 
     def new_job
       click_link(TEXT_NEW_JOB_LINK)
+      JobPage.new(@browser)
+    end
+
+    class JobPage < BrowserContainer
+      ID_NAME = 'job_request_request_name'
+      ID_CATEGORY = 'job_request_category'
+
+      def job_name(name)
+        set_text(ID_NAME, name)
+        self
+      end
+
+      # TODO: Think about localization and select boxes.
+      def category(category)
+        @browser.select_list(id: ID_CATEGORY).select(category)
+        self
+      end
     end
 
     private
@@ -71,7 +88,7 @@ module Site
   class TeamModal < BrowserContainer
     ID_TEAM_NAME = 'team_name'
     ID_TEAM_CREATE = 'create_team_modal'
-    def create_team(name)
+    def new_team(name)
       set_text(ID_TEAM_NAME, name)
       @browser.button(id: ID_TEAM_CREATE).click
     end

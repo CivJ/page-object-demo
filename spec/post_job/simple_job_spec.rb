@@ -6,6 +6,9 @@ describe 'test.wonolo.com job creation' do
     wonolo = Site::Wonolo.new
     login_page = wonolo.login_page.open
     dashboard_page = login_page.login_as
-    dashboard_page.new_job
+    job_page = dashboard_page.new_job
+    job_page
+      .job_name("auto_test_job#{Time.now.to_i}")
+      .category('Delivery')
   end
 end
