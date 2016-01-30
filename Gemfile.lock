@@ -40,6 +40,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    should_not (1.1.0)
     watir-webdriver (0.9.1)
       selenium-webdriver (>= 2.46.2)
     websocket (1.2.2)
@@ -51,6 +52,7 @@ DEPENDENCIES
   rake
   rspec (~> 3.3)
   rubocop
+  should_not
   watir-webdriver
 
 BUNDLED WITH

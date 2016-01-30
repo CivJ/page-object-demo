@@ -1,3 +1,4 @@
+require_relative '../spec_helper'
 require_relative '../../lib/site/jobs'
 
 describe 'test.wonolo.com team creation' do
