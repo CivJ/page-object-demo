@@ -1,7 +1,9 @@
 require_relative '../../lib/site/jobs'
 
 describe 'test.wonolo.com team creation' do
-  it 'should create a team' do
+
+  # TODO: Think about cleaning up after tests. Writing another test to do deletion is out of scope for this demo.
+  it 'creates a team' do
     wonolo = Site::Wonolo.new
     login_page = wonolo.login_page.open
     dashboard_page = login_page.login_as
