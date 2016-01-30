@@ -14,6 +14,7 @@ module Site
     TEXT_TEAM_LINK = 'Teams'
     TEXT_ADD_TEAM_LINK = '+ New Team'
 
+    attr_reader :browser
     # TODO: Multiple browsers. Browser options could be read from a config file at runtime.
     def initialize(user_name = 'john.crimmins@gmail.com', password = 'password', browser = :chrome)
       @user_name = user_name
@@ -37,8 +38,10 @@ module Site
       link = @browser.link(text: TEXT_ADD_TEAM_LINK)
       link.click
 
-      set_text(ID_TEAM_NAME, name + Time.now.to_i.to_s)
+      team_name = name + Time.now.to_i.to_s
+      set_text(ID_TEAM_NAME, team_name)
       @browser.button(id: ID_TEAM_CREATE).click
+      team_name
     end
 
     private
