@@ -18,6 +18,6 @@ describe 'test.wonolo.com job creation' do
       .address('100 foo street')
       .city('San Francisco')
       .zip('94115')
-      # .start_time(Time.now + 10.hours) uncomment this to begin debugging what's going on with calendar
+    # .start_time(Time.now + 10.hours) uncomment this to begin debugging what's going on with calendar
   end
 end
