@@ -26,6 +26,12 @@ bundle install
 bundle exec rake build
 ```
 
+To run tests without Rubocop
+
+```
+bundle exec rake spec
+```
+
 # From IRB
 ```
 require 'lib/site/jobs'
